@@ -2,6 +2,7 @@ connection:
     server: irc.synirc.net
     port: 6667
     nick: buttbot__
+    nickservpass:
     username: buttbot
     name: hello I am a new buttbot
     channels: ['#buttbot']
