@@ -391,6 +391,17 @@ sub handle_pm_command {
     } elsif ($cmd eq 'deauth') {
         $self->auth_set($who, 0);
         $self->pm_reply($who, "Ok. See you again sometime");
+    } elsif ($cmd eq 'echo') {
+        my ($arg_chan, $arg_msg) = _parse_channel($args);
+        if (defined $arg_chan && $arg_msg ne '') {
+            if (!$self->in_channel($arg_chan)) {
+                $self->pm_reply($who, "I'm not in that channel!");
+            } else {
+                $self->say({body => $arg_msg, channel => $arg_chan});
+            }
+        } else {
+            $self->pm_reply($who, "I need a channel name and a message.");
+        }
     } elsif ($cmd eq 'channel-list') {
         my @channels = $self->get_all_channels;;
         $self->pm_reply($who, "I'm in: " . join(', ', @channels));
